@@ -11,29 +11,19 @@ import java.io.OutputStream;
 public class TryWith {
 
     static String firstLineOFFile(String path) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(path));
-        try {
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             return br.readLine();
-        } finally {
-            br.close();
         }
     }
 
     static void copy(String src, String dst) throws IOException {
-        InputStream in = new FileInputStream(src);
-        try {
-            OutputStream out = new FileOutputStream(dst);
-            try {
-                byte[] buffer = new byte[BUFFER_SIZE];
-                int n;
-                while ((n = in.read(buffer)) >= 0) {
-                    out.write(buffer, 0, n);
-                }
-            } finally {
-                out.close();
+        try (InputStream in = new FileInputStream(src);
+            OutputStream out = new FileOutputStream(dst)) {
+            byte[] buffer = new byte[BUFFER_SIZE];
+            int n;
+            while ((n = in.read(buffer)) >= 0) {
+                out.write(buffer, 0, n);
             }
-        } finally {
-            in.close();
         }
     }
 }
