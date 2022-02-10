@@ -10,6 +10,8 @@ import java.io.OutputStream;
 
 public class TryWith {
 
+    private static final int BUFFER_SIZE = 256;
+
     static String firstLineOFFile(String path) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             return br.readLine();
