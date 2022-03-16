@@ -31,7 +31,7 @@ class TheaterTest {
             + "As You Like It: $580.00 35석\n"
             + "Othello: $500.00 40석\n"
             + "총액: $1730.00\n"
-            + "적립 포인트: 47점";
+            + "적립 포인트: 47점\n";
         assertThat(result).isEqualTo(expected);
     }
 }
