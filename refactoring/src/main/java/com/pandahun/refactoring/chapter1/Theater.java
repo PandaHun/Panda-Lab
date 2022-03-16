@@ -15,11 +15,13 @@ public class Theater {
         String result = "청구 내역 (고객명: " + invoice.getCustomer() + ")\n";
 
         for (Performance perf : invoice.getPerformances()) {
-            volumeCredits += volumeCreditsFor(perf);
             result += (playFor(perf).getName() + ": " + usd((double) amountFor(perf) / 100)
                 + " "
                 + perf.getAudience() + "석\n");
             totalAmount += amountFor(perf);
+        }
+        for (Performance perf : invoice.getPerformances()) {
+            volumeCredits += volumeCreditsFor(perf);
         }
         result += "총액: " + usd((double) totalAmount / 100) + "\n";
         result += "적립 포인트: " + volumeCredits + "점\n";
