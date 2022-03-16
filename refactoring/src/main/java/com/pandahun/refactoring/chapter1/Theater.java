@@ -1,7 +1,6 @@
 package com.pandahun.refactoring.chapter1;
 
 import static com.pandahun.refactoring.chapter1.PlayType.COMEDY;
-import static com.pandahun.refactoring.chapter1.PlayType.TRAGEDY;
 
 import java.util.Map;
 
@@ -14,19 +13,21 @@ public class Theater {
         int volumeCredits = 0;
         this.plays = Map.copyOf(plays);
         String result = "청구 내역 (고객명: " + invoice.getCustomer() + ")\n";
-        String format = "$%.2f";
 
         for (Performance perf : invoice.getPerformances()) {
             volumeCredits += volumeCreditsFor(perf);
-            result += (playFor(perf).getName() + ": " + String.format(format,
-                (double) amountFor(perf) / 100)
+            result += (playFor(perf).getName() + ": " + usd((double) amountFor(perf) / 100)
                 + " "
                 + perf.getAudience() + "석\n");
             totalAmount += amountFor(perf);
         }
-        result += "총액: " + String.format(format, (double) totalAmount / 100) + "\n";
+        result += "총액: " + usd((double) totalAmount / 100) + "\n";
         result += "적립 포인트: " + volumeCredits + "점\n";
         return result;
+    }
+
+    private String usd(double number) {
+        return String.format("$%.2f", number);
     }
 
     private int volumeCreditsFor(Performance perf) {
