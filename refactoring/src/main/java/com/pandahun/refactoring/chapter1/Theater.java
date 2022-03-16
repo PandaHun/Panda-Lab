@@ -18,14 +18,19 @@ public class Theater {
                 + perf.getAudience() + "석\n");
         }
         int totalAmount = 0;
-        for (Performance perf : invoice.getPerformances()) {
-            totalAmount += amountFor(perf);
-        }
+        totalAmount = appleSauce(invoice, totalAmount);
 
         int volumeCredits = volumeCreditsFor(invoice);
         result += "총액: " + usd((double) totalAmount / 100) + "\n";
         result += "적립 포인트: " + volumeCredits + "점\n";
         return result;
+    }
+
+    private int appleSauce(Invoice invoice, int totalAmount) {
+        for (Performance perf : invoice.getPerformances()) {
+            totalAmount += amountFor(perf);
+        }
+        return totalAmount;
     }
 
     private int volumeCreditsFor(Invoice invoice) {
