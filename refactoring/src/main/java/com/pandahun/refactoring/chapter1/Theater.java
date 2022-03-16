@@ -18,15 +18,14 @@ public class Theater {
 
         for (Performance perf : invoice.getPerformances()) {
             Play play = playFor(perf);
-            int thisAmount = amountFor(perf);
             volumeCredits += Math.max(perf.getAudience() - 30, 0);
             if (play.getType() == COMEDY) {
                 volumeCredits += Math.floor((double) perf.getAudience() / 5.0);
             }
-            result += (play.getName() + ": " + String.format(format, (double) thisAmount / 100)
+            result += (play.getName() + ": " + String.format(format, (double) amountFor(perf) / 100)
                 + " "
                 + perf.getAudience() + "석\n");
-            totalAmount += thisAmount;
+            totalAmount += amountFor(perf);
         }
         result += "총액: " + String.format(format, (double) totalAmount / 100) + "\n";
         result += "적립 포인트: " + volumeCredits + "점\n";
