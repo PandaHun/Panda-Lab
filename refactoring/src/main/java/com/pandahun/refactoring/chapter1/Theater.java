@@ -17,12 +17,9 @@ public class Theater {
         String format = "$%.2f";
 
         for (Performance perf : invoice.getPerformances()) {
-            Play play = playFor(perf);
-            volumeCredits += Math.max(perf.getAudience() - 30, 0);
-            if (play.getType() == COMEDY) {
-                volumeCredits += Math.floor((double) perf.getAudience() / 5.0);
-            }
-            result += (play.getName() + ": " + String.format(format, (double) amountFor(perf) / 100)
+            volumeCredits += volumeCreditsFor(perf);
+            result += (playFor(perf).getName() + ": " + String.format(format,
+                (double) amountFor(perf) / 100)
                 + " "
                 + perf.getAudience() + "석\n");
             totalAmount += amountFor(perf);
@@ -30,6 +27,15 @@ public class Theater {
         result += "총액: " + String.format(format, (double) totalAmount / 100) + "\n";
         result += "적립 포인트: " + volumeCredits + "점\n";
         return result;
+    }
+
+    private int volumeCreditsFor(Performance perf) {
+        int volumeCredits = 0;
+        volumeCredits += Math.max(perf.getAudience() - 30, 0);
+        if (playFor(perf).getType() == COMEDY) {
+            volumeCredits += Math.floor((double) perf.getAudience() / 5.0);
+        }
+        return volumeCredits;
     }
 
     private int amountFor(Performance performance) {
