@@ -31,25 +31,25 @@ public class Theater {
     }
 
     private int amountFor(Performance perf, Play play) {
-        int thisAmount;
+        int result;
         switch (play.getType()) {
             case TRAGEDY:
-                thisAmount = 40_000;
+                result = 40_000;
                 if (perf.getAudience() > 30) {
-                    thisAmount += 1000 * (perf.getAudience() - 30);
+                    result += 1000 * (perf.getAudience() - 30);
                 }
                 break;
             case COMEDY:
-                thisAmount = 30_000;
+                result = 30_000;
                 if (perf.getAudience() > 20) {
-                    thisAmount += 10_000 + 500 * (perf.getAudience() - 20);
+                    result += 10_000 + 500 * (perf.getAudience() - 20);
                 }
-                thisAmount += 300 * perf.getAudience();
+                result += 300 * perf.getAudience();
                 break;
             default:
                 throw new IllegalArgumentException(
                     "알 수 없는 장르: " + play.getType().getPlayType());
         }
-        return thisAmount;
+        return result;
     }
 }
