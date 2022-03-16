@@ -9,7 +9,6 @@ public class Theater {
     private Map<String, Play> plays;
 
     public String statement(Invoice invoice, Map<String, Play> plays) {
-        int totalAmount = 0;
         this.plays = Map.copyOf(plays);
         String result = "没备 郴开 (绊按疙: " + invoice.getCustomer() + ")\n";
 
@@ -17,6 +16,9 @@ public class Theater {
             result += (playFor(perf).getName() + ": " + usd((double) amountFor(perf) / 100)
                 + " "
                 + perf.getAudience() + "籍\n");
+        }
+        int totalAmount = 0;
+        for (Performance perf : invoice.getPerformances()) {
             totalAmount += amountFor(perf);
         }
 
