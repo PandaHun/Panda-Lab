@@ -10,7 +10,7 @@ public class OrderLine {
 
     public OrderLine(Product product, Money price, int quantity) {
         this.product = product;
-        this.price = price;
+        this.price = new Money(price.getMoney());
         this.quantity = quantity;
         this.amounts = calculateAmounts();
     }
