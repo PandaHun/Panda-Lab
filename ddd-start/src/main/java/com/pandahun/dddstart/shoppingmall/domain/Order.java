@@ -5,12 +5,15 @@ import java.util.Objects;
 
 public class Order {
 
+    private String orderNumber;
     private List<OrderLine> orderLines;
     private int totalAmounts;
     private OrderState state;
     private ShippingInfo shippingInfo;
 
-    public Order(List<OrderLine> orderLines, OrderState state, ShippingInfo shippingInfo) {
+    public Order(String orderNumber, List<OrderLine> orderLines, OrderState state,
+        ShippingInfo shippingInfo) {
+        this.orderNumber = orderNumber;
         setOrderLines(orderLines);
         setShippingInfo(shippingInfo);
         this.state = state;
@@ -55,5 +58,22 @@ public class Order {
         if (!state.isShippingChangeable()) {
             throw new IllegalStateException("already shipped");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Order order = (Order) o;
+        return orderNumber.equals(order.orderNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderNumber);
     }
 }
