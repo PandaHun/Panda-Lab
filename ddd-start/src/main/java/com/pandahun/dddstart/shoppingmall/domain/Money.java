@@ -12,6 +12,10 @@ public class Money {
         return new Money(this.money + money.money);
     }
 
+    public Money multiply(int multiplier) {
+        return new Money(this.money * multiplier);
+    }
+
     public int getMoney() {
         return money;
     }
