@@ -1,7 +1,9 @@
 package com.pandahun.refactoring.chapter4;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Province {
 
@@ -18,6 +20,35 @@ public class Province {
         this.demand = data.getDemand();
         this.price = data.getPrice();
         data.getProducers().forEach(this::addProducer);
+    }
+
+    public int getShortFall() {
+        return demand - totalProduction;
+    }
+
+    public int getProfit() {
+        return demandValue() - demandCost();
+    }
+
+    private int demandCost() {
+        AtomicInteger remainingDemand = new AtomicInteger(demand);
+        AtomicInteger result = new AtomicInteger();
+        producers.stream()
+            .sorted(Comparator.comparingInt(Producer::getCost))
+            .forEach(producer -> {
+                int contribution = Math.min(remainingDemand.get(), producer.getProduction());
+                remainingDemand.addAndGet(-contribution);
+                result.addAndGet(contribution * producer.getCost());
+            });
+        return result.get();
+    }
+
+    private int demandValue() {
+        return satisfiedDemand() * price;
+    }
+
+    private int satisfiedDemand() {
+        return Math.min(demand, totalProduction);
     }
 
     public String getName() {
