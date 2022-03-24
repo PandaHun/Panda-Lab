@@ -5,8 +5,8 @@ import java.util.Objects;
 public class Producer {
 
     private final String name;
-    private final int cost;
-    private final int production;
+    private int cost;
+    private int production;
 
     public Producer(String name, int cost, int production) {
         this.name = name;
@@ -24,6 +24,14 @@ public class Producer {
 
     public int getProduction() {
         return production;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public void setProduction(int production) {
+        this.production = production;
     }
 
     @Override
