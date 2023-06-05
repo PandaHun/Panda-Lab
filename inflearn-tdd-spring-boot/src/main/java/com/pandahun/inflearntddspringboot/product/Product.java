@@ -13,9 +13,9 @@ class Product {
         this.name = name;
         this.price = price;
         this.discountPolicy = discountPolicy;
-        Assert.hasText(name, "»óÇ°¸íÀº ÇÊ¼öÀÔ´Ï´Ù.");
-        Assert.isTrue(price > 0, "»óÇ° °¡°İÀº 0º¸´Ù Ä¿¾ß ÇÕ´Ï´Ù.");
-        Assert.notNull(discountPolicy, "ÇÒÀÎ Á¤Ã¥Àº ÇÊ¼öÀÔ´Ï´Ù.");
+        Assert.hasText(name, "ìƒí’ˆëª…ì€ í•„ìˆ˜ì…ë‹ˆë‹¤.");
+        Assert.isTrue(price > 0, "ìƒí’ˆ ê°€ê²©ì€ 0ë³´ë‹¤ ì»¤ì•¼ í•©ë‹ˆë‹¤.");
+        Assert.notNull(discountPolicy, "í• ì¸ ì •ì±…ì€ í•„ìˆ˜ì…ë‹ˆë‹¤.");
     }
 
     public void assignId(final Long id) {
