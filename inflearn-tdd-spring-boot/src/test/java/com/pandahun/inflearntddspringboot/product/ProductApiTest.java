@@ -1,19 +1,28 @@
 package com.pandahun.inflearntddspringboot.product;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
+import com.pandahun.inflearntddspringboot.ApiTest;
+import io.restassured.RestAssured;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class ProductServiceTest {
+public class ProductApiTest extends ApiTest {
 
     @Autowired
     private ProductService productService;
 
     @Test
     void 상품등록() {
-        final AddProductRequest request = 상품등록요청_생성();
-        productService.addProduct(request);
+        final var request = 상품등록요청_생성();
+
+        RestAssured.given().log().all()
+            .contentType(APPLICATION_JSON_VALUE)
+            .body(request)
+            .when()
+            .post("/products")
+            .then()
+            .log().all().extract();
     }
 
     private AddProductRequest 상품등록요청_생성() {
