@@ -9,5 +9,7 @@
 * [security](./security)
 * [토비의 스프링 3.1](./toby-spring)
 * [단위 테스트](./unit-test)
-* [실전! 스프린ㅇ부트 상품-주문 API개발로 알아보는 
+* [실전! 스프링 부트 상품-주문 API개발로 알아보는 
 TDD](./inflearn-tdd-spring-boot)
+* [토비의 스프링 부트 - 이해와 원리](./toby-spring-boot)
+
